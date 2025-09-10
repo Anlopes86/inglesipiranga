@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Memória: Vocabulário - 6º Ano</title>
+    <link rel="stylesheet" href="../../../css/estilo-geral.css">
+</head>
+<body>
+
+    <header class="cabecalho">
+        <h1><span class="emoji">🧠</span> Jogo da Memória: Vocabulário</h1>
+        <p>Encontre os pares de palavras em inglês e português!</p>
+    </header>
+
+    <main class="container">
+        <a href="index.html" class="botao-voltar">&larr; Voltar para 6º Ano</a>
+        
+        <div class="atividade-container">
+            <h2 class="atividade-titulo">Como Jogar</h2>
+            <p class="atividade-descricao">
+                Clique nas cartas para virá-las e encontre os pares correspondentes entre as palavras em inglês e português. 
+                Tente completar o jogo no menor tempo e com o menor número de movimentos possível!
+            </p>
+        </div>
+        
+        <div id="memory-game-area"></div>
+    </main>
+
+    <footer class="rodape">
+        <p>Desenvolvido pelo Professor André Rosa Lopes</p>
+    </footer>
+
+    <script src="../../../js/quiz.js"></script>
+    <script>
+        // Cartas do jogo da memória (inglês-português)
+        const memoryCards = [
+            "Cat", "Gato",
+            "Dog", "Cachorro", 
+            "House", "Casa",
+            "School", "Escola",
+            "Book", "Livro",
+            "Water", "Água",
+            "Food", "Comida",
+            "Friend", "Amigo"
+        ];
+
+        // Inicializa o jogo da memória
+        const memoryGame = new MemoryGame(memoryCards, 'memory-game-area');
+    </script>
+
+</body>
+</html>
+

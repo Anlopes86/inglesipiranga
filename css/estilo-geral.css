@@ -1,0 +1,552 @@
+/* Importando uma fonte bonita do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+/* --- Configurações Gerais (O "Uniforme" do Site) --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f8; /* Um cinza azulado bem claro */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto; /* Centraliza o conteúdo */
+    flex-grow: 1;
+}
+
+/* --- Cabeçalho --- */
+.cabecalho {
+    background-color: #005a8d; /* Azul escuro */
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.cabecalho h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+.cabecalho p {
+    margin: 5px 0 0;
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+/* --- Seção das Turmas --- */
+.secao-turmas h2 {
+    font-size: 1.8em;
+    border-bottom: 3px solid #ffa500; /* Laranja */
+    padding-bottom: 10px;
+    margin-top: 40px;
+}
+
+.secao-turmas .emoji {
+    margin-right: 10px;
+}
+
+.grade-turmas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px; /* Espaço entre os cartões */
+    margin-top: 20px;
+}
+
+/* --- Cartão de cada Turma --- */
+.cartao-turma {
+    background-color: #ffffff;
+    color: #005a8d;
+    text-decoration: none;
+    text-align: center;
+    padding: 40px 20px;
+    border-radius: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cartao-turma:hover {
+    transform: translateY(-10px); /* Efeito de "levantar" o cartão */
+    box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+    background-color: #ffa500;
+    color: white;
+}
+
+/* --- Rodapé --- */
+.rodape {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto; /* Empurra o rodapé para o final da página */
+}
+/* --- Estilos para a Página de Lista de Aulas (Adicionado Agora) --- */
+
+.botao-voltar {
+    display: inline-block;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 30px;
+    transition: background-color 0.3s;
+}
+
+.botao-voltar:hover {
+    background-color: #555;
+}
+
+.lista-aulas {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.item-aula {
+    background-color: white;
+    padding: 20px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-left: 5px solid #005a8d; /* Uma borda colorida na esquerda */
+}
+
+.item-aula:hover {
+    transform: translateX(10px);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.12);
+    border-left-color: #ffa500;
+}
+
+.item-aula h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.4em;
+    color: #005a8d;
+}
+
+.item-aula p {
+    margin: 0;
+    font-size: 1em;
+}
+
+/* --- Fim dos novos estilos --- */
+/* --- Estilos para Quiz Interativo --- */
+.quiz-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.quiz-header {
+    background: linear-gradient(135deg, #005a8d, #0077b6);
+    color: white;
+    padding: 20px;
+}
+
+.progress-bar {
+    background: rgba(255,255,255,0.3);
+    height: 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.progress {
+    background: #ffa500;
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.question-counter {
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.question-card {
+    padding: 30px;
+}
+
+.question-text {
+    font-size: 1.4em;
+    margin-bottom: 30px;
+    color: #333;
+    text-align: center;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.option-btn {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1em;
+}
+
+.option-btn:hover {
+    border-color: #005a8d;
+    background: #f8f9fa;
+}
+
+.option-btn.selected {
+    border-color: #005a8d;
+    background: #005a8d;
+    color: white;
+}
+
+.option-letter {
+    background: #ffa500;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.option-btn.selected .option-letter {
+    background: white;
+    color: #005a8d;
+}
+
+.quiz-actions {
+    text-align: center;
+}
+
+.next-btn {
+    background: #ffa500;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.next-btn:hover:not(:disabled) {
+    background: #e69500;
+}
+
+.next-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* --- Estilos para Resultados do Quiz --- */
+.results-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+.results-card {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    max-width: 500px;
+}
+
+.results-emoji {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+.score-display {
+    margin: 30px 0;
+}
+
+.score-number {
+    font-size: 3em;
+    font-weight: bold;
+    color: #005a8d;
+}
+
+.score-percentage {
+    font-size: 1.5em;
+    color: #ffa500;
+    font-weight: bold;
+}
+
+.results-message {
+    font-size: 1.2em;
+    margin: 20px 0;
+    color: #666;
+}
+
+.results-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.restart-btn, .review-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.restart-btn {
+    background: #005a8d;
+    color: white;
+}
+
+.restart-btn:hover {
+    background: #004a7a;
+}
+
+.review-btn {
+    background: #ffa500;
+    color: white;
+}
+
+.review-btn:hover {
+    background: #e69500;
+}
+
+/* --- Estilos para Revisão --- */
+.review-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.review-question {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 5px solid #ccc;
+}
+
+.review-question.correct {
+    border-left-color: #28a745;
+    background: #f8fff9;
+}
+
+.review-question.incorrect {
+    border-left-color: #dc3545;
+    background: #fff8f8;
+}
+
+.user-answer {
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.correct-answer {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.explanation {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    border-left: 3px solid #005a8d;
+}
+
+/* --- Estilos para Jogo da Memória --- */
+.memory-game {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.game-stats {
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 20px;
+}
+
+.memory-card {
+    aspect-ratio: 1;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.memory-card:hover {
+    transform: scale(1.05);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    border-radius: 10px;
+    backface-visibility: hidden;
+    transition: transform 0.6s;
+}
+
+.card-front {
+    background: #005a8d;
+    color: white;
+}
+
+.card-back {
+    background: #ffa500;
+    color: white;
+    transform: rotateY(180deg);
+}
+
+.memory-card.flipped .card-front {
+    transform: rotateY(180deg);
+}
+
+.memory-card.flipped .card-back {
+    transform: rotateY(0deg);
+}
+
+.memory-card.matched {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.memory-card.matched .card-back {
+    background: #28a745;
+}
+
+/* --- Estilos para Atividades Interativas --- */
+.atividade-container {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.atividade-titulo {
+    color: #005a8d;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.atividade-descricao {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+.botao-atividade {
+    display: inline-block;
+    background: linear-gradient(135deg, #005a8d, #0077b6);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,90,141,0.3);
+}
+
+.botao-atividade:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,90,141,0.4);
+    color: white;
+}
+
+.botao-atividade.laranja {
+    background: linear-gradient(135deg, #ffa500, #ff8c00);
+    box-shadow: 0 4px 15px rgba(255,165,0,0.3);
+}
+
+.botao-atividade.laranja:hover {
+    box-shadow: 0 6px 20px rgba(255,165,0,0.4);
+}
+
+/* --- Responsividade para dispositivos móveis --- */
+@media (max-width: 768px) {
+    .memory-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .quiz-container {
+        margin: 10px;
+    }
+    
+    .question-card {
+        padding: 20px;
+    }
+    
+    .results-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .restart-btn, .review-btn {
+        width: 200px;
+    }
+}
+

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Past: Irregular Verbs - 7º Ano</title>
+    <link rel="stylesheet" href="../../../css/estilo-geral.css">
+
+    <style>
+        body {
+            background-image: url('../../../imagens/fundo_medieval.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+        .conteudo-aula {
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 25px 35px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .conteudo-aula h2 { font-size: 32px; }
+        .conteudo-aula p { font-size: 20px; }
+
+        /* --- SEÇÃO DE AQUECIMENTO --- */
+        .secao-aquecimento { text-align: center; margin-bottom: 40px; }
+        .grade-cartoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .cartao-discussao { background-color: #e0d9c7; border: 2px solid #5d4a3a; border-radius: 8px; padding: 20px; cursor: pointer; transition: all 0.3s ease; }
+        .cartao-discussao:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(0,0,0,0.2); }
+        .cartao-discussao h3 { margin: 0; color: #5d4a3a; font-family: 'Times New Roman', serif; font-size: 26px; }
+        .pergunta-escondida { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; margin-top: 0; }
+        .cartao-discussao.ativo .pergunta-escondida { max-height: 200px; margin-top: 15px; }
+
+        /* --- JORNADA INTERATIVA (RPG) --- */
+        #jornada-rpg {
+            background-color: #f4ead5;
+            padding: 30px;
+            border-radius: 5px;
+            border: 3px solid #c8b89a;
+            font-family: 'Garamond', serif;
+        }
+        .passo-rpg { display: none; }
+        .passo-rpg.ativo { display: block; }
+        .passo-rpg .texto-historia { font-size: 28px !important; line-height: 1.7; margin-bottom: 20px; }
+        .desafio { background-color: #e0d9c7; border: 2px dashed #5d4a3a; padding: 15px; border-radius: 5px; text-align: center; font-style: italic; font-size: 20px; color: #333; }
+        
+        /* NOVO ESTILO DOS VERBOS */
+        .verbo-interativo {
+            cursor: pointer;
+            font-weight: normal; /* Garante que não está em negrito por padrão */
+            text-decoration: none; /* Garante que não está sublinhado por padrão */
+            color: inherit; /* Garante que tem a mesma cor do texto por padrão */
+            transition: color 0.2s;
+        }
+        .verbo-interativo:hover {
+            color: #8b0000; /* Fica vermelho apenas ao passar o mouse */
+            text-decoration: underline;
+        }
+        /* --- FIM DA JORNADA --- */
+
+        /* Tabela de Verbos */
+        .tabela-verbos { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 20px; }
+        .tabela-verbos th, .tabela-verbos td { border: 1px solid #c8b89a; padding: 12px; text-align: center; }
+        .tabela-verbos th { background-color: #e0d9c7; font-weight: bold; font-size: 22px; }
+
+        /* --- ESTILOS DO POP-UP DE ERRO (NOVO) --- */
+        .modal-overlay {
+            position: fixed; /* Cobre a tela inteira */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Fundo preto semi-transparente */
+            display: none; /* Começa escondido */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Fica na frente de tudo */
+        }
+        .modal-box {
+            background-color: #f4ead5;
+            padding: 40px;
+            border-radius: 10px;
+            border: 4px solid #5d4a3a;
+            text-align: center;
+            color: #333;
+        }
+        .modal-box h2 {
+            font-size: 2.5em;
+            color: #8b0000;
+            margin-top: 0;
+        }
+        .modal-box button {
+            background-color: #5d4a3a;
+            color: #f4ead5;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        /* --- ESTILOS DO QUIZ "O DESAFIO DO CAVALEIRO" --- */
+#quiz-cavaleiro {
+    background-color: #e0d9c7;
+    padding: 20px 30px;
+    border-radius: 8px;
+    margin-top: 30px;
+    border: 3px solid #5d4a3a;
+}
+.quiz-pergunta {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #5d4a3a;
+}
+.quiz-pergunta:last-child {
+    border-bottom: none; /* Remove a linha da última pergunta */
+}
+.resposta-aluno {
+    font-size: 1em;
+    padding: 5px;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    width: 150px;
+    transition: border-color 0.3s;
+}
+.botao-verificar {
+    background-color: #5d4a3a;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 0.9em;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+.feedback {
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+/* Estilos para feedback */
+.correto {
+    border-color: #28a745; /* Verde */
+}
+.incorreto {
+    border-color: #dc3545; /* Vermelho */
+}
+    </style>
+</head>
+<body>
+
+    <header class="cabecalho">
+        <h1>Simple Past: Irregular Verbs</h1>
+        <p>Uma jornada pela Idade Média</p>
+    </header>
+
+    <main class="container">
+        <a href="index.html" class="botao-voltar">&larr; Voltar para a lista do 7º Ano</a>
+        <div class="conteudo-aula">
+            
+            <section class="secao-aquecimento">
+    <h2>Aquecimento: A Pirâmide Social</h2>
+    <p>Vamos visualizar a estrutura da Idade Média. Clique em cada camada da pirâmide para discutir!</p>
+    
+    <div class="piramide-social">
+        <div class="camada-piramide">
+            <div class="cartao-discussao rei">
+                <h3>👑 Reis (King & Queen)</h3>
+                <p class="descricao-camada">A família real, que governava a terra.</p>
+                <div class="pergunta-escondida">
+                    <p>Quem manda no nosso mundo hoje como os reis mandavam antigamente? Presidentes, bilionários, influencers?</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="camada-piramide">
+            <div class="cartao-discussao nobreza">
+                <h3>⚔️ Nobreza (Nobles & Knights)</h3>
+                <p class="descricao-camada">Donos de terras, como lordes, duques e cavaleiros. Ofereciam proteção militar.</p>
+                <div class="pergunta-escondida">
+                    <p>Quem seriam os nobres de hoje? Celebridades, políticos, grandes empresários? Por quê?</p>
+                </div>
+            </div>
+            <div class="cartao-discussao clero">
+                <h3>⛪ Clero (Clergy)</h3>
+                <p class="descricao-camada">A autoridade da Igreja, como o Papa, bispos e padres. Tinham grande influência.</p>
+                <div class="pergunta-escondida">
+                    <p>Quem influencia as pessoas hoje como o clero? A mídia, cientistas, líderes religiosos?</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="camada-piramide">
+            <div class="cartao-discussao camponeses">
+                <h3>👩‍🌾 Camponeses (Peasants & Serfs)</h3>
+                <p class="descricao-camada">A grande maioria da população. Trabalhavam na terra em troca de proteção.</p>
+                <div class="pergunta-escondida">
+                    <p>E os camponeses, que eram a maioria trabalhadora? Quem eles representam na nossa sociedade atual?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+            <hr>
+
+            <div id="jornada-rpg">
+                <h2 style="text-align:center;">As Escolhas do Escriba</h2>
+
+                <div id="passo-1" class="passo-rpg ativo">
+                    <p class="texto-historia">Long ago, in a forgotten <span class="verbo-interativo palavra-errada">kingdom</span>, a young scribe <span class="verbo-interativo palavra-chave" data-target="passo-2">lost</span> the king's most important scrolls. The scrolls contained the secret magic of the Irregular Verbs. Without them, people only <span class="verbo-interativo palavra-errada">spoke</span> about the present.</p>
+                    <p class="desafio">Para continuar, clique no verbo que significa "perdeu".</p>
+                </div>
+
+                <div id="passo-2" class="passo-rpg">
+                    <p class="texto-historia">The king was very angry and sent for the scribe. "You <span class="verbo-interativo palavra-errada">went</span> to the library and <span class="verbo-interativo palavra-errada">took</span> the scrolls!" the king <span class="verbo-interativo palavra-chave" data-target="passo-3">shouted</span>. The young scribe felt terrified, but he knew he needed to fix his mistake.</p>
+                    <p class="desafio">O rei estava furioso. Clique na palavra que descreve como ele falou (gritou).</p>
+                </div>
+
+                <div id="passo-3" class="passo-rpg">
+                    <p class="texto-historia">The scribe traveled to the Whispering Woods. He <span class="verbo-interativo palavra-chave" data-target="passo-4">saw</span> a strange bird and <span class="verbo-interativo palavra-errada">thought</span> it was a sign. He followed the bird and it led him to an old, hidden cave.</p>
+                    <p class="desafio">Nos bosques, ele encontrou um pássaro. Clique no passado do verbo "SEE" (ver).</p>
+                </div>
+
+                <div id="passo-4" class="passo-rpg">
+                     <p class="texto-historia">Inside the cave, he finally <span class="verbo-interativo palavra-chave" data-target="passo-final">found</span> the lost scrolls! He <span class="verbo-interativo palavra-errada">read</span> the first line and suddenly understood the magic of the past. He carefully put the scrolls in his bag and returned to the king, becoming a hero.</p>
+                    <p class="desafio">Missão cumprida! Clique na palavra que significa "encontrou".</p>
+                </div>
+
+                <div id="passo-final" class="passo-rpg">
+                    <p class="texto-historia" style="text-align:center; font-weight:bold;">Parabéns! Você ajudou o escriba a completar sua jornada e recuperou a magia dos Verbos Irregulares! Agora, estude os pergaminhos abaixo.</p>
+                </div>
+            </div>
+            
+            <br>
+            
+            <h2>Os Pergaminhos Encontrados: Irregular Verbs</h2>
+            <table class="tabela-verbos">
+                <thead><tr><th>Base Form (Present)</th><th>Simple Past</th><th>Tradução</th></tr></thead>
+                <tbody>
+                    <tr><td>Go</td><td>Went</td><td>Ir / Fui</td></tr>
+                    <tr><td>See</td><td>Saw</td><td>Ver / Vi</td></tr>
+                    <tr><td>Take</td><td>Took</td><td>Pegar / Peguei</td></tr>
+                    <tr><td>Find</td><td>Found</td><td>Encontrar / Encontrei</td></tr>
+                    <tr><td>Speak</td><td>Spoke</td><td>Falar / Falei</td></tr>
+                    <tr><td>Know</td><td>Knew</td><td>Saber / Sabia</td></tr>
+                    <tr><td>Think</td><td>Thought</td><td>Pensar / Pensei</td></tr>
+                    <tr><td>Feel</td><td>Felt</td><td>Sentir / Senti</td></tr>
+                    <tr><td>Read</td><td>Read</td><td>Ler / Li (a pronúncia muda)</td></tr>
+                    <tr><td>Lose</td><td>Lost</td><td>Perder / Perdi</td></tr>
+                    <tr><td>Shout</td><td>Shouted</td><td>Gritar / Gritou (Este é regular, bom para comparação!)</td></tr>
+                </tbody>
+            </table>
+
+            <section id="quiz-cavaleiro">
+    <h2>Prática: O Desafio do Cavaleiro</h2>
+    <p>Ajude o cavaleiro a completar sua jornada! Digite a forma correta do verbo no Simple Past e clique em "Verificar!".</p>
+
+    <div class="desafio-container">
+        <div class="quiz-pergunta">
+            <p>1. The brave knight <input type="text" class="resposta-aluno" data-resposta="went"> (go) to the dragon's cave.</p>
+            <button class="botao-verificar">Verificar!</button>
+            <span class="feedback"></span>
+        </div>
+
+        <div class="quiz-pergunta">
+            <p>2. He <input type="text" class="resposta-aluno" data-resposta="took"> (take) his magic sword with him.</p>
+            <button class="botao-verificar">Verificar!</button>
+            <span class="feedback"></span>
+        </div>
+        
+        <div class="quiz-pergunta">
+            <p>3. He <input type="text" class="resposta-aluno" data-resposta="saw"> (see) the big dragon and <input type="text" class="resposta-aluno" data-resposta="felt"> (feel) a little scared.</p>
+            <button class="botao-verificar">Verificar!</button>
+            <span class="feedback"></span>
+        </div>
+
+        <div class="quiz-pergunta">
+            <p>4. The knight <input type="text" class="resposta-aluno" data-resposta="spoke"> (speak) to the dragon with a loud voice.</p>
+            <button class="botao-verificar">Verificar!</button>
+            <span class="feedback"></span>
+        </div>
+
+        <div class="quiz-pergunta">
+            <p>5. He <input type="text" class="resposta-aluno" data-resposta="found"> (find) the lost treasure and became a hero.</p>
+            <button class="botao-verificar">Verificar!</button>
+            <span class="feedback"></span>
+        </div>
+    </div>
+</section>
+    </main>
+    
+    <div id="modal-erro" class="modal-overlay">
+        <div class="modal-box">
+            <h2>Oh no!</h2>
+            <p style="font-size: 1.5em;">The scribe has died!</p>
+            <button id="botao-tentar-novamente">Try Again</button>
+        </div>
+    </div>
+    
+    <footer class="rodape">
+        <p>Desenvolvido pelo Professor [Seu Nome Aqui]</p>
+    </footer>
+
+    <script>
+        // --- LÓGICA PARA OS CARTÕES DE DISCUSSÃO ---
+        document.querySelectorAll('.cartao-discussao').forEach(cartao => {
+            cartao.addEventListener('click', () => cartao.classList.toggle('ativo'));
+        });
+
+        // --- LÓGICA PARA A JORNADA INTERATIVA (RPG) ---
+        // Lógica para as palavras corretas
+        document.querySelectorAll('.palavra-chave').forEach(palavra => {
+            palavra.addEventListener('click', () => {
+                const passoAtual = palavra.closest('.passo-rpg');
+                const proximoPassoId = palavra.dataset.target;
+                const proximoPasso = document.getElementById(proximoPassoId);
+                if (proximoPasso) {
+                    passoAtual.classList.remove('ativo');
+                    proximoPasso.classList.add('ativo');
+                }
+            });
+        });
+
+        // --- NOVA LÓGICA DO POP-UP DE ERRO ---
+        const modalErro = document.getElementById('modal-erro');
+        const botaoTentarNovamente = document.getElementById('botao-tentar-novamente');
+
+        // Lógica para mostrar o pop-up ao clicar na palavra errada
+        document.querySelectorAll('.palavra-errada').forEach(palavra => {
+            palavra.addEventListener('click', () => {
+                modalErro.style.display = 'flex'; // Usamos flex para centralizar o conteúdo
+            });
+        });
+
+        // Lógica para fechar o pop-up
+        botaoTentarNovamente.addEventListener('click', () => {
+            modalErro.style.display = 'none';
+        });
+        // --- LÓGICA PARA O QUIZ "O DESAFIO DO CAVALEIRO" ---
+document.querySelectorAll('.botao-verificar').forEach(botao => {
+    botao.addEventListener('click', () => {
+        // Pega o container da pergunta inteira (a div)
+        const perguntaDiv = botao.closest('.quiz-pergunta');
+        // Pega todos os inputs DENTRO dessa div
+        const inputs = perguntaDiv.querySelectorAll('.resposta-aluno');
+        const feedbackSpan = perguntaDiv.querySelector('.feedback');
+        
+        let todasCorretas = true;
+
+        inputs.forEach(input => {
+            const respostaUsuario = input.value.trim().toLowerCase(); // Limpa e põe em minúsculas
+            const respostaCorreta = input.dataset.resposta.toLowerCase();
+
+            if (respostaUsuario === respostaCorreta) {
+                input.classList.remove('incorreto');
+                input.classList.add('correto');
+            } else {
+                input.classList.remove('correto');
+                input.classList.add('incorreto');
+                todasCorretas = false; // Se pelo menos uma estiver errada, marca como falso
+            }
+        });
+
+        // Mostra o feedback final para a pergunta
+        if (todasCorretas) {
+            feedbackSpan.textContent = 'Correto! ⚔️';
+            feedbackSpan.style.color = '#28a745';
+        } else {
+            feedbackSpan.textContent = 'Errou! Tente de novo 🛡️';
+            feedbackSpan.style.color = '#dc3545';
+        }
+    });
+});
+    </script>
+</body>
+</html>
